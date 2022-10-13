@@ -1,8 +1,10 @@
 const { Profile, Seller } = require('../models/index')
+const bcrypt = require('bcryptjs')
 
 class Controller {
     static login(req,res){
-        res.render('login')
+        const { error } = req.query
+            res.render('login', { error } )
     }
     
     static registrationForm(req,res){
@@ -15,7 +17,7 @@ class Controller {
         Seller.create({
             username,
             password
-        })
+        },{returning:true})
         .then((data)=>{
             Profile.create({
                 fullName:fullName,
@@ -25,8 +27,37 @@ class Controller {
                 address:address,
                 photo:photo,
                 SellerId:data.id})
+                .then(()=>{
+                    res.redirect(`/`)
+                })
+                .catch((reject)=>{
+                    res.send(reject)
+                })
+        })
+        .catch((reject)=>{
+            res.send(reject)
+        })
+    }
 
-        res.redirect(`/`)
+    static postLogin(req,res){
+        const {username,password} = req.body
+        Seller.findOne({
+            username})
+        .then((seller)=>{
+            console.log(seller,`<<<<<<<<<<<`)
+            if(seller){
+                const isValidPassword = bcrypt.compareSync(password,seller.password)  
+                if(isValidPassword){
+                    req.session.sellerId = seller.id 
+                    return res.redirect(`/home?id=${seller.id}`)
+                } else {
+                    const error = "Invalid Username/Password!"
+                    return res.redirect(`/login?error=${error}`)
+                }
+            } else {
+                const error = "Invalid Username/Password!"
+                return res.redirect(`/login?error=${error}`)
+            }
         })
         .catch((reject)=>{
             res.send(reject)

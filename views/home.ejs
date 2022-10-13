@@ -17,10 +17,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="/home?id=<%= sellerId %>">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/home/add">Add Listing</a>
+              <a class="nav-link" href="/home/add?id=<%= sellerId %>">Add Listing</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,8 +34,9 @@
               </ul>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <form method="get" class="d-flex" role="search">
+            <input type="hidden" name="id" value="<%= sellerId %>" />
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <!-- <button class="btn btn-outline-danger" type="submit">Log Out</button> -->
@@ -51,7 +52,7 @@
             <div class="card-body">
               <h5 class="card-title"><%= el.name %></h5>
               <p class="card-text"><%= el.description %></p>
-              <p class="card-text"><%= el.price %></p>
+              <p class="card-text"><%= toRupiah(el.price) %></p>
               <a href="/home/<%= el.id %>" class="stretched-link"></a>
             </div>
           </div>
