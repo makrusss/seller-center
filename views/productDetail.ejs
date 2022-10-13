@@ -22,7 +22,9 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/profile/<%= data.Seller.id %>">View Profile</a></li>
-                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="/profile/<%= data.Seller.id %>/edit">Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
               </ul>
             </li>
           </ul>
@@ -37,7 +39,8 @@
     <br>
     <h3><%= data.name %></h3>
     <p><%= data.description %></p>
-    <p><%= data.Seller.Profile.fullName %></p>
+    <p><%= toRupiah(data.price) %></p>
+    <p>Seller: <%= data.Seller.Profile.fullName %></p>
     <p><%= data.Seller.username %></p>
     <br>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">

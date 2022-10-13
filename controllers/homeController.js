@@ -1,5 +1,4 @@
 const { Product, Profile, Seller } = require("../models/index")
-const url = require('url')
 const toRupiah = require('../helpers/toRupiah')
 const qrcode = require("qrcode")
 const { Op } = require("sequelize")
