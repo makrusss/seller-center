@@ -17,5 +17,13 @@
     "pg": "^8.8.0",
     "qrcode": "^1.5.1",
     "sequelize": "^6.25.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makrusss/seller-center.git"
+  },
+  "bugs": {
+    "url": "https://github.com/makrusss/seller-center/issues"
+  },
+  "homepage": "https://github.com/makrusss/seller-center#readme"
 }

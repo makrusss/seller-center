@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req,res)=>{
-    res.redirect('/login')
-})
+const profile = require('./profile')
+const Controller = require("../controllers/homeController")
 
+router.get('/', Controller.renderHome)
+router.get('/:id', Controller.renderProductDetail)
+
+router.use('/profile', profile)
 
 module.exports = router  
