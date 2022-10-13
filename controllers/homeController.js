@@ -5,6 +5,9 @@ class Controller{
   static renderHome(req, res) {
     let sellerId = req.query.id
     Product.findAll({
+      where: {
+        SellerId: sellerId
+      },
       include: {
         model: Seller
       }
@@ -40,6 +43,10 @@ class Controller{
         });
     })
     });
+  }
+
+  static addProduct(req, res) {
+    res.render('addProduct')
   }
 }
 
