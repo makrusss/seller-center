@@ -41,8 +41,7 @@ class Controller {
 
     static postLogin(req,res){
         const {username,password} = req.body
-        Seller.findOne({
-            username})
+        Seller.findOne({where:{username}})
         .then((seller)=>{
             console.log(seller,`<<<<<<<<<<<`)
             if(seller){
