@@ -49,7 +49,6 @@ class Controller{
       }
     })
     .then(data => {
-      console.log(data.Seller);
       res.render("productDetail", {
         qr_code: src, data, toRupiah
         });
@@ -89,7 +88,21 @@ class Controller{
     .catch((reject)=>{
         res.send(reject)
     })
-}
+  }
+  static delete(req,res){
+    const id = req.params.prodId
+    const sellerId = req.params.sellerId
+        Product.destroy({
+            where:{id:id}
+        })
+        .then((data)=>{
+          console.log(data)
+            res.redirect(`/home?id=${sellerId}`)
+        })
+        .catch((reject)=>{
+            res.send(reject)
+        })
+  }
 }
 
 module.exports = Controller
